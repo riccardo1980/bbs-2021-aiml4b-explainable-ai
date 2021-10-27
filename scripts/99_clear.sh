@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -e
 
-. config.sh
+. scripts/config.sh
 
 # Delete model version resource
 gcloud ai-platform versions delete $VERSION --quiet --model $MODEL

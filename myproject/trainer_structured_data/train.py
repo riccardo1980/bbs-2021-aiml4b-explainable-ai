@@ -10,6 +10,15 @@ import tensorflow as tf
 def split_features_labels(
     dframe: pd.DataFrame, label_col: str = "duration"
 ) -> Tuple[pd.Series, pd.DataFrame]:
+    """Features/label splitting
+
+    Provides two dframes (features, label) from single input dframe
+
+    :param dframe: input pandas dataframe
+    :param label_col: label column name, defaults to "duration"
+    :return: (features dframe, label dframe)
+
+    """
 
     labels = dframe[label_col]
     features = dframe.drop(columns=[label_col])
@@ -18,7 +27,12 @@ def split_features_labels(
 
 
 def run(options: Dict[str, Any]) -> None:
+    """Main loop
 
+    :param options: input options as dict
+    :return: None
+
+    """
     with tf.io.gfile.GFile(options["train_dataset"]) as f:
         train_data = pd.read_csv(f)
 
@@ -28,7 +42,21 @@ def run(options: Dict[str, Any]) -> None:
     train_data, train_labels = split_features_labels(train_data)
     eval_data, eval_labels = split_features_labels(eval_data)
 
+    train_size = len(train_data)
+    X_train = tf.data.Dataset.from_tensor_slices(train_data)
+    y_train = tf.data.Dataset.from_tensor_slices(train_labels)
+    X_train = X_train.batch(options["batch_size"]).repeat()
+    y_train = y_train.batch(options["batch_size"]).repeat()
+
+    X_eval = tf.data.Dataset.from_tensor_slices(eval_data)
+    y_eval = tf.data.Dataset.from_tensor_slices(eval_labels)
+    X_eval = X_eval.batch(options["batch_size"])
+    y_eval = y_eval.batch(options["batch_size"])
+
     # Build your model
+    tensorboard_callback = tf.keras.callbacks.TensorBoard(
+        log_dir=options["export_path"]
+    )
     model = tf.keras.Sequential(name="bike_predict")
     model.add(
         tf.keras.layers.Dense(64, input_dim=len(train_data.iloc[0]), activation="relu")
@@ -41,27 +69,23 @@ def run(options: Dict[str, Any]) -> None:
     model.compile(loss="mean_squared_logarithmic_error", optimizer=optimizer)
     model.summary()
 
-    input_train = tf.data.Dataset.from_tensor_slices(train_data)
-    output_train = tf.data.Dataset.from_tensor_slices(train_labels)
-    input_train = input_train.batch(options["batch_size"]).repeat()
-    output_train = output_train.batch(options["batch_size"]).repeat()
-    train_dataset = tf.data.Dataset.zip((input_train, output_train))
-
-    train_size = len(train_data)
     model.fit(
-        train_dataset,
+        tf.data.Dataset.zip((X_train, y_train)),
         steps_per_epoch=train_size // options["batch_size"],
         epochs=options["epochs"],
+        validation_data=tf.data.Dataset.zip((X_eval, y_eval)),
+        callbacks=[tensorboard_callback],
     )
-
-    # Run evaluation
-    results = model.evaluate(eval_data, eval_labels)
-    logging.info(results)
 
     model.save(options["export_path"])
 
 
 def build_parser() -> argparse.ArgumentParser:
+    """Parser building logic
+
+    :return: parser
+
+    """
     parser = argparse.ArgumentParser()
 
     parser.add_argument(
@@ -76,9 +100,11 @@ def build_parser() -> argparse.ArgumentParser:
         "--export_path", required=True, type=str, help="Model destination"
     )
 
-    parser.add_argument("--batch_size", required=True, type=int, help="Batch size")
+    parser.add_argument(
+        "--batch_size", required=True, type=int, help="Batch size", default=256
+    )
 
-    parser.add_argument("--epochs", required=True, type=int, help="Epochs")
+    parser.add_argument("--epochs", required=True, type=int, help="Epochs", default=3)
 
     return parser
 
