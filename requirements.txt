@@ -5,3 +5,4 @@ tabulate==0.8.9
 witwidget==1.8.1
 fsspec==2021.10.1
 gcsfs==2021.10.1
+matplotlib==3.4.3

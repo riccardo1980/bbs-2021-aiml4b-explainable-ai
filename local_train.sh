@@ -2,8 +2,8 @@
 
 # Choosing between local/remote run
 POSITION=${1:-"local"}
-TRAINER_PACKAGE_PATH='myproject/trainer_structured_data'
-MAIN_TRAINER_MODULE='trainer_structured_data.train'
+TRAINER_PACKAGE_PATH='myproject/trainer_tabular_data'
+MAIN_TRAINER_MODULE='trainer_tabular_data.train'
 RUNTIME_VERSION=2.4
 PYTHON_VERSION=3.7
 
@@ -13,12 +13,13 @@ TRAIN_DATASET=../data/train.csv
 EVAL_DATASET=../data/test.csv
 ###################################################################
 DATE=$(date +"%Y%m%d_%H%M%S")
-JOBID=structured_data_$DATE
-MODEL_FOLDER_DESTINATION=../mdl/structured_data/training/$JOBID/
+JOBID=tabular_data_$DATE
+MODEL_FOLDER_DESTINATION=../mdl/tabular_data/training/$JOBID/
 
 trainer_pars="--export_path=$MODEL_FOLDER_DESTINATION \
               --train_dataset=$TRAIN_DATASET \
-              --eval_dataset=$EVAL_DATASET"
+              --eval_dataset=$EVAL_DATASET \
+              --epochs 10"
 
 gcloud ai-platform local train \
 --package-path $TRAINER_PACKAGE_PATH \

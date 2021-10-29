@@ -16,16 +16,20 @@ jupyter nbextension enable --py widgetsnbextension --sys-prefix
 WitWidget support:
 - https://github.com/microsoft/vscode-jupyter/wiki/IPyWidget-Support-in-VS-Code-Python
 
+# References
+- [Introduction to Vertex Explainable AI ](https://cloud.google.com/vertex-ai/docs/explainable-ai/overview)
+- [Use TensorFlow with Explainable AI](https://cloud.google.com/vertex-ai/docs/explainable-ai/tensorflow)
+- 
 
 scripts:
     - [DONE] clear
 
 notebook:
-    - [DONE] 00 data prepare
-    - [DONE] 01 local train launch
-    - 02 cloud train
-    - [DONE] 03 model setup & deploy
+    - [DONE] data prepare
+    - [DONE] local train
+    - [WORKING] model setup & deploy
     - [WORKING] 04 inference / explanation / visualization (missing visualization)
 
 module:
-    - trainer
+    - [DONE] trainer_tabular_data
+    - trainer_image_data

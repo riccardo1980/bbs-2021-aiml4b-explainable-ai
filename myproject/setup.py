@@ -8,5 +8,5 @@ setup(
     install_requires=REQUIRED_PACKAGES,
     packages=find_packages(),
     include_package_data=True,
-    description="basic regression from tabular data.",
+    description="basic models for tabular/image data.",
 )
