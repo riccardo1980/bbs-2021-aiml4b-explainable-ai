@@ -56,3 +56,4 @@ geckodriver.log
 
 # data folder
 data/
+mdl/*
