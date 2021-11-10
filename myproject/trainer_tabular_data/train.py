@@ -1,7 +1,7 @@
 import argparse
 import logging
-import sys
 import os
+import sys
 from typing import Any, Dict, Tuple
 
 import pandas as pd
@@ -78,8 +78,8 @@ def run(options: Dict[str, Any]) -> None:
         callbacks=[tensorboard_callback],
     )
 
-    exported_model_folder = os.path.join(options["export_path"], 'model')
-    logging.info('saving model to: {}'.format(exported_model_folder))
+    exported_model_folder = os.path.join(options["export_path"], "model")
+    logging.info("saving model to: {}".format(exported_model_folder))
     model.save(exported_model_folder)
 
 
@@ -103,9 +103,7 @@ def build_parser() -> argparse.ArgumentParser:
         "--export_path", required=True, type=str, help="Model destination"
     )
 
-    parser.add_argument(
-        "--batch_size", type=int, help="Batch size", default=256
-    )
+    parser.add_argument("--batch_size", type=int, help="Batch size", default=256)
 
     parser.add_argument("--epochs", type=int, help="Epochs", default=3)
 

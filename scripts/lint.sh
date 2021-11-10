@@ -3,7 +3,7 @@ set -e
 
 SRCS="myproject"
 TEST_SRCS=
-TOOLS=
+TOOLS="notebooks"
 
 [ -d $SRCS ] || (echo "Run this script from project root"; exit 1)
 

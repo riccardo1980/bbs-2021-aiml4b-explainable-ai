@@ -13,11 +13,27 @@ no_implicit_optional = true
 strict_optional = true
 
 [[tool.mypy.overrides]]
-module = "tensorflow"
+module = "tensorflow.*"
 ignore_missing_imports = true
 
 [[tool.mypy.overrides]]
 module = "pandas"
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = "matplotlib.*"
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = "google.cloud"
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = "PIL"
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = "googleapiclient"
 ignore_missing_imports = true
 
 # isort options

@@ -1,25 +1,23 @@
 #!/usr/bin/env bash
 
-# Choosing between local/remote run
-POSITION=${1:-"local"}
-TRAINER_PACKAGE_PATH='myproject/trainer_tabular_data'
-MAIN_TRAINER_MODULE='trainer_tabular_data.train'
+TRAINER_PACKAGE_PATH='myproject/trainer_image_data'
+MAIN_TRAINER_MODULE='trainer_image_data.train'
 RUNTIME_VERSION=2.4
 PYTHON_VERSION=3.7
 
 # Additional user arguments to be forwarded to user code.
 # Any relative paths will be relative to the parent directory of --package-path
-TRAIN_DATASET=../data/tabular_data/train.csv
-EVAL_DATASET=../data/tabular_data/test.csv
+TRAIN_DATASET=../data/image_data/train_small
+EVAL_DATASET=../data/image_data/test
 ###################################################################
 DATE=$(date +"%Y%m%d_%H%M%S")
-JOBID=tabular_data_$DATE
-MODEL_FOLDER_DESTINATION=../mdl/tabular_data/training/$JOBID/
+JOBID=image_data_$DATE
+MODEL_FOLDER_DESTINATION=../mdl/image_data/training/$JOBID/
 
 trainer_pars="--export_path=$MODEL_FOLDER_DESTINATION \
               --train_dataset=$TRAIN_DATASET \
               --eval_dataset=$EVAL_DATASET \
-              --epochs 10"
+              --epochs 1"
 
 gcloud ai-platform local train \
 --package-path $TRAINER_PACKAGE_PATH \

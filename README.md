@@ -17,9 +17,10 @@ WitWidget support:
 - https://github.com/microsoft/vscode-jupyter/wiki/IPyWidget-Support-in-VS-Code-Python
 
 # References
-- [Introduction to Vertex Explainable AI ](https://cloud.google.com/vertex-ai/docs/explainable-ai/overview)
+- [Introduction to Vertex Explainable AI](https://cloud.google.com/vertex-ai/docs/explainable-ai/overview)
 - [Use TensorFlow with Explainable AI](https://cloud.google.com/vertex-ai/docs/explainable-ai/tensorflow)
-- 
+- [AI Explanations: Explaining a tabular data model](https://colab.research.google.com/github/GoogleCloudPlatform/ai-platform-samples/blob/master/notebooks/samples/explanations/tf2/ai-explanations-tabular.ipynb#scrollTo=mHF9VCProKJN)
+- [AI Explanations: Deploying an image model](https://colab.research.google.com/github/GoogleCloudPlatform/ai-platform-samples/blob/master/notebooks/samples/explanations/tf2/ai-explanations-image.ipynb#scrollTo=mHF9VCProKJN)
 
 scripts:
     - [DONE] clear
