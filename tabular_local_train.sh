@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-# Choosing between local/remote run
-POSITION=${1:-"local"}
 TRAINER_PACKAGE_PATH='myproject/trainer_tabular_data'
 MAIN_TRAINER_MODULE='trainer_tabular_data.train'
 RUNTIME_VERSION=2.4
