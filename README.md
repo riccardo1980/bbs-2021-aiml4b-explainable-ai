@@ -2,10 +2,6 @@
 gcloud config list --format 'value(core.project)' 
 gcloud config set project <PROJECT_NAME>
 ```
-```
-jupyter nbextension install --py widgetsnbextension --sys-prefix
-jupyter nbextension enable --py widgetsnbextension --sys-prefix
-```
 
 1. [Select or create a GCP project.](https://console.cloud.google.com/cloud-resource-manager)
 
@@ -21,16 +17,3 @@ WitWidget support:
 - [Use TensorFlow with Explainable AI](https://cloud.google.com/vertex-ai/docs/explainable-ai/tensorflow)
 - [AI Explanations: Explaining a tabular data model](https://colab.research.google.com/github/GoogleCloudPlatform/ai-platform-samples/blob/master/notebooks/samples/explanations/tf2/ai-explanations-tabular.ipynb#scrollTo=mHF9VCProKJN)
 - [AI Explanations: Deploying an image model](https://colab.research.google.com/github/GoogleCloudPlatform/ai-platform-samples/blob/master/notebooks/samples/explanations/tf2/ai-explanations-image.ipynb#scrollTo=mHF9VCProKJN)
-
-scripts:
-    - [DONE] clear
-
-notebook:
-    - [DONE] data prepare
-    - [DONE] local train
-    - [WORKING] model setup & deploy
-    - [WORKING] 04 inference / explanation / visualization (missing visualization)
-
-module:
-    - [DONE] trainer_tabular_data
-    - trainer_image_data
